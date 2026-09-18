@@ -1,78 +1,1206 @@
-let row=document.createElement("div");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alt Tiers</title>
 
-row.className="adminplayer";
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-row.innerHTML=`
-<strong>${name}</strong>
+body{
+font-family:Arial,sans-serif;
+background:#080a0e;
+color:white;
+}
 
-<div>
+header{
+background:#11151b;
+border-bottom:1px solid #292f39;
+padding:15px;
+position:sticky;
+top:0;
+z-index:100;
+}
 
-<button class="edit"
-onclick="editPlayer('${name}')">
-EDIT
+.header{
+max-width:1100px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+
+.logo{
+font-size:25px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo span{color:#7c5cff}
+
+.nav{
+display:flex;
+gap:6px;
+}
+
+.nav button{
+background:#1a2028;
+color:white;
+border:1px solid #303844;
+padding:9px 12px;
+border-radius:7px;
+font-weight:bold;
+}
+
+.nav button.active{
+background:#7c5cff;
+border-color:#7c5cff;
+}
+
+.hero{
+text-align:center;
+padding:45px 15px 25px;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.hero h1 span{color:#7c5cff}
+
+.hero p{
+color:#929aa6;
+margin-top:10px;
+}
+
+.section{
+display:none;
+max-width:950px;
+margin:auto;
+padding:15px 15px 60px;
+}
+
+.section.active{display:block}
+
+.section h2{
+text-align:center;
+margin:15px 0 25px;
+}
+
+.modes{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:9px;
+margin-bottom:25px;
+}
+
+.mode{
+background:#151a21;
+color:#ddd;
+border:1px solid #303844;
+padding:11px 15px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.mode.active{
+background:#7c5cff;
+color:white;
+border-color:#7c5cff;
+}
+
+.tier{
+display:flex;
+min-height:70px;
+margin-bottom:8px;
+background:#11151b;
+border:1px solid #252b34;
+border-radius:8px;
+overflow:hidden;
+}
+
+.tiername{
+width:75px;
+min-width:75px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+}
+
+.players{
+padding:9px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+align-items:center;
+}
+
+.player{
+background:#1b2129;
+border:1px solid #303844;
+padding:9px 12px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.player:hover{
+border-color:#7c5cff;
+}
+
+.ht1{background:#ff4757}
+.lt1{background:#ff6b81}
+.ht2{background:#ffa502}
+.lt2{background:#ffb84d}
+.ht3{background:#2ed573}
+.lt3{background:#7bed9f}
+.ht4{background:#1e90ff}
+.lt4{background:#70a1ff}
+.ht5{background:#747d8c}
+.lt5{background:#a4b0be}
+
+.search{
+display:block;
+width:100%;
+max-width:500px;
+margin:0 auto 25px;
+padding:13px;
+background:#11151b;
+border:1px solid #303844;
+border-radius:8px;
+color:white;
+}
+
+.card{
+background:#11151b;
+border:1px solid #252b34;
+border-radius:10px;
+padding:18px;
+margin-bottom:12px;
+}
+
+.card h3{margin-bottom:12px}
+
+.badge{
+display:inline-block;
+padding:7px 9px;
+border-radius:5px;
+margin:4px;
+font-size:13px;
+}
+
+.adminbox{
+background:#11151b;
+border:1px solid #252b34;
+border-radius:10px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.adminbox h3{
+margin-bottom:15px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:6px 0 14px;
+background:#0b0e13;
+border:1px solid #303844;
+border-radius:7px;
+color:white;
+}
+
+.save{
+width:100%;
+padding:13px;
+background:#7c5cff;
+border:0;
+border-radius:7px;
+color:white;
+font-weight:bold;
+}
+
+.adminplayer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+background:#1a2028;
+padding:12px;
+border-radius:7px;
+margin:7px 0;
+}
+
+.edit{
+background:#7c5cff;
+color:white;
+border:0;
+padding:7px 10px;
+border-radius:5px;
+}
+
+.delete{
+background:#d63031;
+color:white;
+border:0;
+padding:7px 10px;
+border-radius:5px;
+margin-left:5px;
+}
+
+.loading{
+text-align:center;
+color:#929aa6;
+padding:25px;
+}
+
+.error{
+text-align:center;
+color:#ff6b6b;
+padding:25px;
+}
+
+footer{
+text-align:center;
+padding:25px;
+border-top:1px solid #252b34;
+color:#727b88;
+}
+
+@media(max-width:600px){
+
+.header{
+flex-direction:column;
+}
+
+.nav{
+width:100%;
+}
+
+.nav button{
+flex:1;
+font-size:12px;
+padding:10px 5px;
+}
+
+.logo{
+font-size:23px;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+.mode{
+font-size:13px;
+padding:10px 12px;
+}
+
+.tiername{
+width:62px;
+min-width:62px;
+font-size:13px;
+}
+
+.adminplayer{
+flex-direction:column;
+align-items:stretch;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header">
+
+<div class="logo">
+ALT <span>TIERS</span>
+</div>
+
+<div class="nav">
+
+<button class="active" onclick="section('tierlist',this)">
+Tier List
 </button>
 
-<button class="delete"
-onclick="deletePlayer('${name}')">
-DELETE
+<button onclick="section('players',this)">
+Players
+</button>
+
+<button onclick="section('admin',this)">
+Admin
 </button>
 
 </div>
+</div>
+</header>
+
+<div class="hero">
+
+<h1>
+Minecraft <span>PvP</span> Tier List
+</h1>
+
+<p>
+Competitive Minecraft PvP rankings
+</p>
+
+</div>
+
+
+<!-- TIER LIST -->
+
+<section id="tierlist" class="section active">
+
+<div class="modes">
+
+<button class="mode active" onclick="changeMode('NethPot',this)">
+NethPot
+</button>
+
+<button class="mode" onclick="changeMode('Crystal',this)">
+Crystal
+</button>
+
+<button class="mode" onclick="changeMode('Sword',this)">
+Sword
+</button>
+
+<button class="mode" onclick="changeMode('Axe',this)">
+Axe
+</button>
+
+<button class="mode" onclick="changeMode('SMP',this)">
+SMP
+</button>
+
+<button class="mode" onclick="changeMode('Mace',this)">
+Mace
+</button>
+
+<button class="mode" onclick="changeMode('Cart',this)">
+Cart
+</button>
+
+</div>
+
+<h2 id="currentMode">NethPot</h2>
+
+<div id="tierlistbox">
+<div class="loading">Loading players...</div>
+</div>
+
+</section>
+
+
+<!-- PLAYERS -->
+
+<section id="players" class="section">
+
+<h2>Players</h2>
+
+<input
+class="search"
+id="search"
+placeholder="Search player..."
+oninput="searchPlayers()">
+
+<div id="playerlist">
+<div class="loading">Loading players...</div>
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="section">
+
+<h2>Admin Panel</h2>
+
+<div class="adminbox">
+
+<h3>Add / Update Player</h3>
+
+<input
+id="ign"
+placeholder="Minecraft IGN">
+
+
+<label>NethPot</label>
+<select id="nethpot">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>Crystal UHC</label>
+<select id="crystal">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>Sword</label>
+<select id="sword">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>Axe</label>
+<select id="axe">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>SMP</label>
+<select id="smp">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>Mace</label>
+<select id="mace">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<label>Cart</label>
+<select id="cart">
+<option value="">No Tier</option>
+<option>HT1</option>
+<option>LT1</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+
+<button class="save" onclick="savePlayer()">
+SAVE PLAYER
+</button>
+
+</div>
+
+
+<div class="adminbox">
+
+<h3>Manage Players</h3>
+
+<div id="adminlist">
+<div class="loading">Loading players...</div>
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+© 2026 Alt Tiers • Minecraft PvP Tier List
+</footer>
+
+
+<!-- FIREBASE SCRIPT -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+doc,
+setDoc,
+deleteDoc,
+onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBoifgMvEE12eF6mi8s5Sce6RmNXAG0Alk",
+
+authDomain: "alt-tier.firebaseapp.com",
+
+projectId: "alt-tier",
+
+storageBucket: "alt-tier.firebasestorage.app",
+
+messagingSenderId: "752454762187",
+
+appId: "1:752454762187:web:f8d7a15c1b5aee705f254e"
+
+};
+
+
+/* FIREBASE START */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* DATA */
+
+window.players = {};
+
+const modes = [
+"NethPot",
+"Crystal",
+"Sword",
+"Axe",
+"SMP",
+"Mace",
+"Cart"
+];
+
+const tiers = [
+"HT1",
+"LT1",
+"HT2",
+"LT2",
+"HT3",
+"LT3",
+"HT4",
+"LT4",
+"HT5",
+"LT5"
+];
+
+
+/* SECTION */
+
+window.section = function(id,button){
+
+document
+.querySelectorAll(".section")
+.forEach(x => x.classList.remove("active"));
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav button")
+.forEach(x => x.classList.remove("active"));
+
+button.classList.add("active");
+
+if(id === "players"){
+renderPlayers();
+}
+
+if(id === "admin"){
+renderAdmin();
+}
+
+};
+
+
+/* CHANGE MODE */
+
+window.changeMode = function(mode,button){
+
+document.getElementById("currentMode")
+.textContent = mode;
+
+document
+.querySelectorAll(".mode")
+.forEach(x => x.classList.remove("active"));
+
+if(button){
+button.classList.add("active");
+}
+
+let box =
+document.getElementById("tierlistbox");
+
+box.innerHTML = "";
+
+
+tiers.forEach(tier => {
+
+let row =
+document.createElement("div");
+
+row.className = "tier";
+
+row.innerHTML = `
+<div class="tiername ${tier.toLowerCase()}">
+${tier}
+</div>
+
+<div class="players"></div>
 `;
+
+let playerbox =
+row.querySelector(".players");
+
+
+Object.keys(window.players).forEach(name => {
+
+let player =
+window.players[name];
+
+if(player[mode] === tier){
+
+let p =
+document.createElement("div");
+
+p.className = "player";
+
+p.textContent = name;
+
+p.onclick = function(){
+profile(name);
+};
+
+playerbox.appendChild(p);
+
+}
+
+});
 
 box.appendChild(row);
 
 });
 
+};
+
+
+/* PROFILE */
+
+window.profile = function(name){
+
+let p = window.players[name];
+
+if(!p){
+return;
 }
+
+let text =
+name + "\n\n";
+
+modes.forEach(mode => {
+
+text +=
+mode + ": " +
+(p[mode] || "No Tier") +
+"\n";
+
+});
+
+alert(text);
+
+};
+
+
+/* SAVE PLAYER */
+
+window.savePlayer = async function(){
+
+let name =
+document
+.getElementById("ign")
+.value
+.trim();
+
+
+if(!name){
+
+alert("Enter Minecraft IGN");
+
+return;
+
+}
+
+
+let playerData = {
+
+NethPot:
+document.getElementById("nethpot").value,
+
+Crystal:
+document.getElementById("crystal").value,
+
+Sword:
+document.getElementById("sword").value,
+
+Axe:
+document.getElementById("axe").value,
+
+SMP:
+document.getElementById("smp").value,
+
+Mace:
+document.getElementById("mace").value,
+
+Cart:
+document.getElementById("cart").value
+
+};
+
+
+try{
+
+await setDoc(
+doc(db,"players",name),
+playerData
+);
+
+alert("Player saved online!");
+
+clearForm();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+"Save failed: " +
+error.message
+);
+
+}
+
+};
+
+
+/* CLEAR FORM */
+
+window.clearForm = function(){
+
+document.getElementById("ign").value = "";
+
+document.getElementById("nethpot").value = "";
+document.getElementById("crystal").value = "";
+document.getElementById("sword").value = "";
+document.getElementById("axe").value = "";
+document.getElementById("smp").value = "";
+document.getElementById("mace").value = "";
+document.getElementById("cart").value = "";
+
+};
+
+
+/* EDIT PLAYER */
+
+window.editPlayer = function(name){
+
+let p =
+window.players[name];
+
+if(!p){
+return;
+}
+
+document.getElementById("ign").value =
+name;
+
+document.getElementById("nethpot").value =
+p.NethPot || "";
+
+document.getElementById("crystal").value =
+p.Crystal || "";
+
+document.getElementById("sword").value =
+p.Sword || "";
+
+document.getElementById("axe").value =
+p.Axe || "";
+
+document.getElementById("smp").value =
+p.SMP || "";
+
+document.getElementById("mace").value =
+p.Mace || "";
+
+document.getElementById("cart").value =
+p.Cart || "";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+
+/* DELETE PLAYER */
+
+window.deletePlayer = async function(name){
+
+if(!confirm("Delete " + name + "?")){
+return;
+}
+
+
+try{
+
+await deleteDoc(
+doc(db,"players",name)
+);
+
+alert("Player deleted!");
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+"Delete failed: " +
+error.message
+);
+
+}
+
+};
+
+
+/* ADMIN LIST */
+
+window.renderAdmin = function(){
+
+let box =
+document.getElementById("adminlist");
+
+box.innerHTML = "";
+
+let names =
+Object.keys(window.players);
+
+
+if(names.length === 0){
+
+box.innerHTML =
+'<div class="loading">No players added yet.</div>';
+
+return;
+
+}
+
+
+names.sort().forEach(name => {
+
+let row =
+document.createElement("div");
+
+row.className =
+"adminplayer";
+
+
+let strong =
+document.createElement("strong");
+
+strong.textContent = name;
+
+
+let buttons =
+document.createElement("div");
+
+
+let edit =
+document.createElement("button");
+
+edit.className = "edit";
+
+edit.textContent = "EDIT";
+
+edit.onclick = function(){
+
+editPlayer(name);
+
+};
+
+
+let del =
+document.createElement("button");
+
+del.className = "delete";
+
+del.textContent = "DELETE";
+
+del.onclick = function(){
+
+deletePlayer(name);
+
+};
+
+
+buttons.appendChild(edit);
+
+buttons.appendChild(del);
+
+row.appendChild(strong);
+
+row.appendChild(buttons);
+
+box.appendChild(row);
+
+});
+
+};
 
 
 /* PLAYERS */
 
-function renderPlayers(){
+window.renderPlayers = function(){
 
-let box=
+let box =
 document.getElementById("playerlist");
 
-box.innerHTML="";
+box.innerHTML = "";
 
-Object.keys(players).forEach(name=>{
+let names =
+Object.keys(window.players);
+
+
+if(names.length === 0){
+
+box.innerHTML =
+'<div class="loading">No players added yet.</div>';
+
+return;
+
+}
+
+
+names.sort().forEach(name => {
 
 createCard(name,box);
 
 });
 
-}
+};
 
 
 /* SEARCH */
 
-function searchPlayers(){
+window.searchPlayers = function(){
 
-let q=
-document.getElementById("search")
-.value.toLowerCase();
+let q =
+document
+.getElementById("search")
+.value
+.toLowerCase();
 
-let box=
+let box =
 document.getElementById("playerlist");
 
-box.innerHTML="";
+box.innerHTML = "";
 
-Object.keys(players)
-.filter(name=>
+
+Object.keys(window.players)
+
+.filter(name =>
 name.toLowerCase().includes(q)
 )
-.forEach(name=>{
+
+.sort()
+
+.forEach(name => {
+
 createCard(name,box);
+
 });
+
+};
+
+
+/* PLAYER CARD */
+
+window.createCard = function(name,box){
+
+let card =
+document.createElement("div");
+
+card.className = "card";
+
+
+let title =
+document.createElement("h3");
+
+title.textContent = name;
+
+card.appendChild(title);
+
+
+modes.forEach(mode => {
+
+let tier =
+window.players[name][mode];
+
+
+if(tier){
+
+let badge =
+document.createElement("span");
+
+badge.className =
+"badge " + tier.toLowerCase();
+
+badge.textContent =
+mode + ": " + tier;
+
+card.appendChild(badge);
 
 }
 
-
-/* CARD */
-
-function createCard(name,box){
-
-let card=document.createElement("div");
+});
 
 
+box.appendChild(card);
+
+};
+
+
+/* FIRESTORE REAL-TIME LISTENER */
+
+const playersRef =
+collection(db,"players");
+
+
+onSnapshot(
+playersRef,
+
+(snapshot) => {
+
+window.players = {};
+
+snapshot.forEach(documentSnapshot => {
+
+window.players[
+documentSnapshot.id
+] = documentSnapshot.data();
+
+});
+
+
+console.log(
+"Players loaded:",
+Object.keys(window.players).length
+);
+
+
+changeMode(
+document.getElementById("currentMode").textContent,
+document.querySelector(".mode.active")
+);
+
+renderPlayers();
+
+renderAdmin();
+
+},
+
+(error) => {
+
+console.error(
+"Firebase error:",
+error
+);
+
+document.getElementById("tierlistbox").innerHTML =
+'<div class="error">Firebase error: ' +
+error.message +
+'</div>';
+
+}
+
+);
+
+
+/* INITIAL */
+
+window.addEventListener("load",function(){
+
+changeMode(
+"NethPot",
+document.querySelector(".mode")
+);
+
+});
+
+</script>
+
+</body>
+  </html>
