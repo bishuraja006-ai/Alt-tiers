@@ -1,102 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCTiers Style</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alt Tiers | Minecraft PvP Tier List</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-            text-align: center;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        h1 {
-            margin-top: 30px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0d10;
+    color: #ffffff;
+}
 
-        .modes {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 25px;
-        }
+/* HEADER */
+header {
+    background: #11151b;
+    border-bottom: 1px solid #252b34;
+    padding: 18px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #374151;
-            color: white;
-            cursor: pointer;
-        }
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
 
-        button:hover {
-            background: #4b5563;
-        }
+.logo span {
+    color: #7c5cff;
+}
 
-        .tier {
-            width: 90%;
-            max-width: 700px;
-            margin: 15px auto;
-            padding: 20px;
-            background: #1f2937;
-            border-radius: 10px;
-        }
-    </style>
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 55px 20px 35px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    color: #7c5cff;
+}
+
+.hero p {
+    color: #9da5b1;
+    font-size: 15px;
+}
+
+/* MODE BUTTONS */
+.modes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 15px 30px;
+}
+
+.mode-btn {
+    background: #151a21;
+    color: #cbd0d8;
+    border: 1px solid #2b323c;
+    border-radius: 8px;
+    padding: 11px 17px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.mode-btn:hover {
+    border-color: #7c5cff;
+    color: white;
+}
+
+.mode-btn.active {
+    background: #7c5cff;
+    border-color: #7c5cff;
+    color: white;
+}
+
+/* TIER LIST */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 15px 50px;
+}
+
+.mode-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.tier {
+    display: flex;
+    min-height: 75px;
+    margin-bottom: 8px;
+    background: #11151b;
+    border: 1px solid #252b34;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tier-name {
+    width: 85px;
+    min-width: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.players {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.player {
+    background: #1c222b;
+    border: 1px solid #303844;
+    border-radius: 6px;
+    padding: 9px 13px;
+    font-size: 14px;
+}
+
+/* TIER COLORS */
+.ht1 { background: #ff4757; }
+.lt1 { background: #ff6b81; }
+.ht2 { background: #ffa502; }
+.lt2 { background: #ffb84d; }
+.ht3 { background: #2ed573; }
+.lt3 { background: #7bed9f; }
+.ht4 { background: #1e90ff; }
+.lt4 { background: #70a1ff; }
+.ht5 { background: #747d8c; }
+.lt5 { background: #a4b0be; }
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid #252b34;
+    color: #777f8c;
+    font-size: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .tier-name {
+        width: 65px;
+        min-width: 65px;
+        font-size: 14px;
+    }
+
+    .player {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <h1>🏆 Minecraft PvP Tier List</h1>
+<header>
+    <div class="logo">ALT <span>TIERS</span></div>
+</header>
 
-    <div class="modes">
-        <button>NethPot</button>
-        <button>Crystal UHC</button>
-        <button>Sword</button>
-        <button>Axe</button>
-        <button>SMP</button>
-        <button>Mace</button>
+<section class="hero">
+    <h1>Minecraft <span>PvP</span> Tier List</h1>
+    <p>Competitive rankings for Minecraft PvP players.</p>
+</section>
+
+<div class="modes">
+    <button class="mode-btn active" onclick="showMode('NethPot', this)">NethPot</button>
+    <button class="mode-btn" onclick="showMode('Crystal UHC', this)">Crystal UHC</button>
+    <button class="mode-btn" onclick="showMode('Sword', this)">Sword</button>
+    <button class="mode-btn" onclick="showMode('Axe', this)">Axe</button>
+    <button class="mode-btn" onclick="showMode('SMP', this)">SMP</button>
+    <button class="mode-btn" onclick="showMode('Mace', this)">Mace</button>
+    <button class="mode-btn" onclick="showMode('Cart', this)">Cart</button>
+</div>
+
+<div class="container">
+
+    <h2 class="mode-title" id="modeTitle">NethPot</h2>
+
+    <div class="tier">
+        <div class="tier-name ht1">HT1</div>
+        <div class="players" id="ht1"></div>
     </div>
 
     <div class="tier">
-        <h2>HT1</h2>
-        <p>No players yet</p>
+        <div class="tier-name lt1">LT1</div>
+        <div class="players" id="lt1"></div>
     </div>
 
     <div class="tier">
-        <h2>LT1</h2>
-        <p>No players yet</p>
+        <div class="tier-name ht2">HT2</div>
+        <div class="players" id="ht2"></div>
     </div>
 
     <div class="tier">
-        <h2>HT2</h2>
-        <p>No players yet</p>
+        <div class="tier-name lt2">LT2</div>
+        <div class="players" id="lt2"></div>
     </div>
 
     <div class="tier">
-        <h2>LT2</h2>
-        <p>No players yet</p>
+        <div class="tier-name ht3">HT3</div>
+        <div class="players" id="ht3"></div>
     </div>
+
+    <div class="tier">
+        <div class="tier-name lt3">LT3</div>
+        <div class="players" id="lt3"></div>
+    </div>
+
+    <div class="tier">
+        <div class="tier-name ht4">HT4</div>
+        <div class="players" id="ht4"></div>
+    </div>
+
+    <div class="tier">
+        <div class="tier-name lt4">LT4</div>
+        <div class="players" id="lt4"></div>
+    </div>
+
+    <div class="tier">
+        <div class="tier-name ht5">HT5</div>
+        <div class="players" id="ht5"></div>
+    </div>
+
+    <div class="tier">
+        <div class="tier-name lt5">LT5</div>
+        <div class="players" id="lt5"></div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Alt Tiers • Minecraft PvP Tier List
+</footer>
+
+<script>
+
+const players = {
+
+    "NethPot": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: ["ExamplePlayer"],
+        ht5: ["GamerA9sh"],
+        lt5: []
+    },
+
+    "Crystal UHC": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    },
+
+    "Sword": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    },
+
+    "Axe": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    },
+
+    "SMP": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    },
+
+    "Mace": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    },
+
+    "Cart": {
+        ht1: [],
+        lt1: [],
+        ht2: [],
+        lt2: [],
+        ht3: [],
+        lt3: [],
+        ht4: [],
+        lt4: [],
+        ht5: [],
+        lt5: []
+    }
+
+};
+
+function showMode(mode, button) {
+
+    document.getElementById("modeTitle").textContent = mode;
+
+    document.querySelectorAll(".mode-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    const data = players[mode];
+
+    const tiers = [
+        "ht1",
+        "lt1",
+        "ht2",
+        "lt2",
+        "ht3",
+        "lt3",
+        "ht4",
+        "lt4",
+        "ht5",
+        "lt5"
+    ];
+
+    tiers.forEach(tier => {
+
+        const box = document.getElementById(tier);
+        box.innerHTML = "";
+
+        data[tier].forEach(player => {
+
+            const div = document.createElement("div");
+            div.className = "player";
+            div.textContent = player;
+
+            box.appendChild(div);
+
+        });
+
+    });
+}
+
+showMode("NethPot", document.querySelector(".mode-btn"));
+
+</script>
 
 </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft PvP Tier List</title>
-</head>
-<body>
-
-    <h1>Minecraft PvP Tier List</h1>
-
-    <p>NethPot • Crystal UHC • Sword • Axe • SMP • Mace</p>
-
-</body>
-</html>
+    </html>
