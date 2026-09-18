@@ -531,7 +531,7 @@ SAVE PLAYER
 
 const modes=[
 "NethPot",
-"Crystal UHC",
+"Crystal",
 "Sword",
 "Axe",
 "SMP",
@@ -548,8 +548,10 @@ const tiers=[
 ];
 
 
-let players=
-JSON.parse(localStorage.getItem("altTiers")) || {};
+localStorage.setItem(
+"altTiers",
+JSON.stringify(players)
+);
 
 
 /* SAVE DATA */
