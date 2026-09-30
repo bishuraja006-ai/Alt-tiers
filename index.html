@@ -43,6 +43,7 @@ letter-spacing:2px;
 .nav{
 display:flex;
 gap:6px;
+flex-wrap:wrap;
 }
 
 .nav button{
@@ -81,3 +82,813 @@ padding:15px 15px 60px;
 }
 
 .section.active{display:block}
+
+.mode-buttons{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.mode-buttons button{
+background:#151a21;
+border:1px solid #303844;
+color:white;
+padding:10px 14px;
+border-radius:7px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.mode-buttons button.active{
+background:#7c5cff;
+border-color:#7c5cff;
+}
+
+.search{
+width:100%;
+padding:13px;
+background:#11151b;
+border:1px solid #303844;
+border-radius:8px;
+color:white;
+outline:none;
+margin-bottom:15px;
+font-size:15px;
+}
+
+.tier{
+display:flex;
+margin-bottom:8px;
+border:1px solid #292f39;
+border-radius:8px;
+overflow:hidden;
+background:#11151b;
+min-height:58px;
+}
+
+.tier-name{
+width:75px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:18px;
+background:#1a2028;
+flex-shrink:0;
+}
+
+.tier-players{
+display:flex;
+align-items:center;
+gap:7px;
+padding:8px;
+flex-wrap:wrap;
+}
+
+.player{
+background:#1b222c;
+border:1px solid #303844;
+padding:8px 11px;
+border-radius:6px;
+font-weight:bold;
+}
+
+.overall-card{
+display:flex;
+align-items:center;
+gap:15px;
+background:#11151b;
+border:1px solid #292f39;
+border-radius:9px;
+padding:14px;
+margin-bottom:9px;
+}
+
+.rank{
+font-size:21px;
+font-weight:900;
+width:35px;
+text-align:center;
+color:#7c5cff;
+}
+
+.overall-info{
+flex:1;
+}
+
+.ign{
+font-size:17px;
+font-weight:900;
+}
+
+.points{
+color:#929aa6;
+font-size:13px;
+margin-top:4px;
+}
+
+.badges{
+display:flex;
+gap:5px;
+flex-wrap:wrap;
+}
+
+.badge{
+background:#1b222c;
+border:1px solid #303844;
+border-radius:5px;
+padding:5px 7px;
+font-size:12px;
+font-weight:bold;
+}
+
+.player-card{
+background:#11151b;
+border:1px solid #292f39;
+border-radius:9px;
+padding:15px;
+margin-bottom:10px;
+}
+
+.player-card h3{
+margin-bottom:10px;
+}
+
+.player-tier{
+display:inline-block;
+background:#1b222c;
+border:1px solid #303844;
+padding:6px 8px;
+border-radius:5px;
+margin:3px;
+font-size:12px;
+font-weight:bold;
+}
+
+.admin-box{
+background:#11151b;
+border:1px solid #292f39;
+border-radius:9px;
+padding:20px;
+}
+
+.admin-box input,
+.admin-box select{
+width:100%;
+padding:11px;
+margin-bottom:10px;
+background:#080a0e;
+border:1px solid #303844;
+border-radius:7px;
+color:white;
+outline:none;
+}
+
+.admin-box button{
+background:#7c5cff;
+border:0;
+color:white;
+padding:11px 16px;
+border-radius:7px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.admin-player{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid #292f39;
+}
+
+.admin-actions button{
+padding:6px 9px;
+border:1px solid #303844;
+background:#1a2028;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.empty{
+text-align:center;
+color:#929aa6;
+padding:30px;
+}
+
+@media(max-width:600px){
+.header{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.nav{
+width:100%;
+}
+
+.nav button{
+flex:1;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.tier-name{
+width:62px;
+font-size:15px;
+}
+
+.overall-card{
+align-items:flex-start;
+}
+
+.badges{
+max-width:150px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header">
+
+<div class="logo">
+ALT <span>TIERS</span>
+</div>
+
+<div class="nav">
+<button class="navbtn active" onclick="showSection('tiers',this)">Tier List</button>
+<button class="navbtn" onclick="showSection('overall',this)">Overall</button>
+<button class="navbtn" onclick="showSection('players',this)">Players</button>
+<button class="navbtn" onclick="showSection('admin',this)">Admin</button>
+</div>
+
+</div>
+</header>
+
+<div class="hero">
+<h1>ALT <span>TIERS</span></h1>
+<p>Minecraft PvP Tier List</p>
+</div>
+
+
+<!-- TIER LIST -->
+
+<section id="tiers" class="section active">
+
+<div class="mode-buttons">
+<button class="mode active" onclick="changeMode('NethPot',this)">NethPot</button>
+<button class="mode" onclick="changeMode('Crystal UHC',this)">Crystal UHC</button>
+<button class="mode" onclick="changeMode('Sword',this)">Sword</button>
+<button class="mode" onclick="changeMode('Axe',this)">Axe</button>
+<button class="mode" onclick="changeMode('SMP',this)">SMP</button>
+<button class="mode" onclick="changeMode('Mace',this)">Mace</button>
+<button class="mode" onclick="changeMode('Cart',this)">Cart</button>
+</div>
+
+<input
+class="search"
+id="tierSearch"
+placeholder="Search player..."
+oninput="renderTierList()"
+>
+
+<div id="tierList"></div>
+
+</section>
+
+
+<!-- OVERALL -->
+
+<section id="overall" class="section">
+
+<input
+class="search"
+id="overallSearch"
+placeholder="Search player..."
+oninput="renderOverall()"
+>
+
+<div id="overallList"></div>
+
+</section>
+
+
+<!-- PLAYERS -->
+
+<section id="players" class="section">
+
+<input
+class="search"
+id="playerSearch"
+placeholder="Search player..."
+oninput="renderPlayers()"
+>
+
+<div id="playerlist"></div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="section">
+
+<div class="admin-box">
+
+<h2 style="margin-bottom:15px;">Admin Panel</h2>
+
+<input id="adminPassword" type="password" placeholder="Admin password">
+
+<button onclick="loginAdmin()">Login</button>
+
+<div id="adminPanel" style="display:none;margin-top:20px;">
+
+<input id="playerName" placeholder="Player IGN">
+
+<select id="playerMode">
+<option>NethPot</option>
+<option>Crystal UHC</option>
+<option>Sword</option>
+<option>Axe</option>
+<option>SMP</option>
+<option>Mace</option>
+<option>Cart</option>
+</select>
+
+<select id="playerTier">
+<option>HT5</option>
+<option>LT5</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT2</option>
+<option>LT2</option>
+<option>HT1</option>
+<option>LT1</option>
+</select>
+
+<button onclick="addPlayer()">Add / Update Player</button>
+
+<div id="adminPlayers" style="margin-top:20px;"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let players = JSON.parse(localStorage.getItem("altTiersPlayers")) || {};
+
+
+/* =========================
+   POINT SYSTEM
+========================= */
+
+const points = {
+"LT5":1,
+"HT5":2,
+"LT4":4,
+"HT4":6,
+"LT3":8,
+"HT3":10,
+"LT2":15,
+"HT2":20,
+"LT1":40,
+"HT1":60
+};
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showSection(id,button){
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".navbtn")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+if(id==="tiers") renderTierList();
+if(id==="overall") renderOverall();
+if(id==="players") renderPlayers();
+if(id==="admin") renderAdmin();
+
+}
+
+
+/* =========================
+   TIER MODES
+========================= */
+
+let currentMode="NethPot";
+
+function changeMode(mode,button){
+
+currentMode=mode;
+
+document.querySelectorAll(".mode")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+renderTierList();
+
+}
+
+
+/* =========================
+   TIER ORDER
+========================= */
+
+const tierOrder=[
+"HT1",
+"LT1",
+"HT2",
+"LT2",
+"HT3",
+"LT3",
+"HT4",
+"LT4",
+"HT5",
+"LT5"
+];
+
+
+/* =========================
+   TIER LIST
+========================= */
+
+function renderTierList(){
+
+let box=document.getElementById("tierList");
+
+if(!box)return;
+
+let search=(document.getElementById("tierSearch")?.value || "")
+.toLowerCase();
+
+box.innerHTML="";
+
+tierOrder.forEach(tier=>{
+
+let names=[];
+
+Object.keys(players).forEach(name=>{
+
+let data=players[name];
+
+if(
+data[currentMode]===tier &&
+name.toLowerCase().includes(search)
+){
+names.push(name);
+}
+
+});
+
+let row=document.createElement("div");
+row.className="tier";
+
+row.innerHTML=`
+<div class="tier-name">${tier}</div>
+<div class="tier-players">
+${names.map(n=>`<div class="player">${n}</div>`).join("")}
+${names.length===0 ? '<span style="color:#59616d">No players</span>' : ''}
+</div>
+`;
+
+box.appendChild(row);
+
+});
+
+}
+
+
+/* =========================
+   OVERALL RANKING
+========================= */
+
+function getOverall(){
+
+let list=[];
+
+Object.keys(players).forEach(name=>{
+
+let total=0;
+let badges=[];
+
+Object.keys(points).forEach(tier=>{
+
+Object.keys(players[name] || {}).forEach(mode=>{
+
+if(players[name][mode]===tier){
+
+total+=points[tier];
+
+badges.push({
+mode:mode,
+tier:tier
+});
+
+}
+
+});
+
+});
+
+if(total>0){
+
+list.push({
+name:name,
+points:total,
+badges:badges
+});
+
+}
+
+});
+
+list.sort((a,b)=>b.points-a.points);
+
+return list;
+
+}
+
+
+function renderOverall(){
+
+let box=document.getElementById("overallList");
+
+if(!box)return;
+
+let search=(document.getElementById("overallSearch")?.value || "")
+.toLowerCase();
+
+box.innerHTML="";
+
+let list=getOverall()
+.filter(x=>x.name.toLowerCase().includes(search));
+
+if(list.length===0){
+
+box.innerHTML='<div class="empty">No players found.</div>';
+return;
+
+}
+
+list.forEach((p,index)=>{
+
+let card=document.createElement("div");
+card.className="overall-card";
+
+card.innerHTML=`
+
+<div class="rank">#${index+1}</div>
+
+<div class="overall-info">
+
+<div class="ign">${p.name}</div>
+
+<div class="points">
+${p.points} points
+</div>
+
+</div>
+
+<div class="badges">
+
+${p.badges.map(b=>
+`<div class="badge">${b.mode}: ${b.tier}</div>`
+).join("")}
+
+</div>
+
+`;
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* =========================
+   PLAYERS
+========================= */
+
+function renderPlayers(){
+
+let box=document.getElementById("playerlist");
+
+if(!box)return;
+
+let search=(document.getElementById("playerSearch")?.value || "")
+.toLowerCase();
+
+box.innerHTML="";
+
+let names=Object.keys(players)
+.filter(n=>n.toLowerCase().includes(search));
+
+if(names.length===0){
+
+box.innerHTML='<div class="empty">No players found.</div>';
+return;
+
+}
+
+names.forEach(name=>{
+
+let card=document.createElement("div");
+card.className="player-card";
+
+let html=`<h3>${name}</h3>`;
+
+Object.keys(players[name]).forEach(mode=>{
+
+html+=`
+<span class="player-tier">
+${mode}: ${players[name][mode]}
+</span>
+`;
+
+});
+
+card.innerHTML=html;
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+function loginAdmin(){
+
+let pass=document.getElementById("adminPassword").value;
+
+/*
+   Change this password.
+*/
+
+if(pass==="altadmin"){
+
+document.getElementById("adminPanel")
+.style.display="block";
+
+renderAdmin();
+
+}else{
+
+alert("Wrong password");
+
+}
+
+}
+
+
+/* =========================
+   ADD / UPDATE
+========================= */
+
+function addPlayer(){
+
+let name=document.getElementById("playerName").value.trim();
+let mode=document.getElementById("playerMode").value;
+let tier=document.getElementById("playerTier").value;
+
+if(!name){
+
+alert("Enter player IGN");
+return;
+
+}
+
+if(!players[name]){
+players[name]={};
+}
+
+players[name][mode]=tier;
+
+saveData();
+
+document.getElementById("playerName").value="";
+
+renderAdmin();
+renderTierList();
+renderOverall();
+renderPlayers();
+
+}
+
+
+/* =========================
+   DELETE PLAYER
+========================= */
+
+function deletePlayer(name){
+
+if(!confirm("Delete "+name+"?"))return;
+
+delete players[name];
+
+saveData();
+
+renderAdmin();
+renderTierList();
+renderOverall();
+renderPlayers();
+
+}
+
+
+/* =========================
+   ADMIN LIST
+========================= */
+
+function renderAdmin(){
+
+let box=document.getElementById("adminPlayers");
+
+if(!box)return;
+
+box.innerHTML="";
+
+Object.keys(players).forEach(name=>{
+
+let row=document.createElement("div");
+row.className="admin-player";
+
+row.innerHTML=`
+
+<div>
+<strong>${name}</strong>
+</div>
+
+<div class="admin-actions">
+<button onclick="deletePlayer('${name.replace(/'/g,"\\'")}')">
+DELETE
+</button>
+</div>
+
+`;
+
+box.appendChild(row);
+
+});
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveData(){
+
+localStorage.setItem(
+"altTiersPlayers",
+JSON.stringify(players)
+);
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+renderTierList();
+renderOverall();
+renderPlayers();
+
+</script>
+
+</body>
+</html>
